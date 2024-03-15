@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo App</title>
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon1.jpg') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>To Do List</h1>
+        {% if message %}
+            <p class="error-message">{{ message }}</p>
+        {% endif %}
+        {% if success_message %}
+            <p class="success-message">{{ success_message }}</p>
+        {% endif %}
+        <p>{% if error_message %}{{ error_message }}{% endif %}</p>
+
+        <form action="/add" method="post">
+            <input type="text" name="task" placeholder="Enter a Task">
+            <select name="category">
+                {% for category in categories %}
+                    <option value="{{ category.id }}">{{ category.name }}</option>
+                {% endfor %}
+            </select>
+            <button type="submit">Add a Task</button>
+        </form>
+        
+
+        <hr>
+
+        {% for task in todo_list %}
+            <div class="task">
+                <p>{{ task.task }}</p>
+                <div class="task-actions">
+                    <form action="/update/{{ task.id }}" method="post">
+                        <button type="submit" class="btn btn-complete">Mark as Complete</button>
+                    </form>
+                    <form action="/delete/{{ task.id }}" method="post">
+                        <button type="submit" class="btn btn-delete">Delete</button>
+                    </form>
+                </div>
+            </div>
+        {% endfor %}
+
+        <a href="/completed_tasks" class="btn btn-view-completed">View Completed</a>
+
+    </div>
+</body>
+</html>
+
