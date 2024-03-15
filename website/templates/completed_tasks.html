@@ -1,26 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Completed Tasks</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
-<body>
-    <!-- Back to Home Button with Red Color and No Underline -->
-    <a href="/" class="btn btn-delete">Back to Home</a>
 
-    <h1>Completed Tasks</h1>
-    <div class="task-container">
-        {% for task in completed_todo_list %}
-            <div class="task-box">
-                <span class="task-index">Task {{ loop.index }}:</span>
-                <span class="task-content">{{ task.task }}</span>
+<body>
+    <div class="container">
+        <h1>Completed Tasks</h1>
+
+        <div class="completed-tasks-container">
+            {% for task in completed_todo_list %}
+            <div class="task-shadow-box">
+                <p>{{ task.task }}</p>
             </div>
-        {% endfor %}
+            {% endfor %}
+        </div>
+
+        <a href="/" class="btn">Back to Home</a>
     </div>
 </body>
+
 </html>
+
 
 
 

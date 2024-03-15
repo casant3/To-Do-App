@@ -29,12 +29,11 @@
             <button type="submit">Add a Task</button>
         </form>
         
-
         <hr>
 
         {% for task in todo_list %}
             <div class="task">
-                <p>{{ task.task }}</p>
+                <p>{{ task.task }}{% if task.category %} - Category: {{ task.category.name }}{% endif %}</p>
                 <div class="task-actions">
                     <form action="/update/{{ task.id }}" method="post">
                         <button type="submit" class="btn btn-complete">Mark as Complete</button>
@@ -51,4 +50,6 @@
     </div>
 </body>
 </html>
+
+
 
